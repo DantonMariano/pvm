@@ -8,7 +8,7 @@
 - Install and manage different PHP versions
 - Shorthand command for Changing Versions -cv
 
-I was running into the issue of doing the same old boring repetitive tasks of googling "how to change php versions on linux/ubuntu/debian etc... the list goes on." So I Had the ideaof simply creating a tool that automates this! for now it only works with Debian/Ubuntu derivative distros. But I'm pretty sure that's the most of you out there anyways (hats off to Fedora users btw)
+I was running into the issue of doing the same old boring repetitive task of googling "how to change php versions on linux/ubuntu/debian etc... the list goes on." So I Had the idea of simply creating a tool that automates this! for now it only works with Debian/Ubuntu derivative distros. But I'm pretty sure that's the most of you out there anyways (hats off to Fedora/CentOS users btw)
 
 > Couldn't there be just a simple package for PHP version management that worked a bit like zork, and a bit like nvm (node version manager)?
 
@@ -18,9 +18,10 @@ PVM requires Python to run, but it will be installed
 as soon as you make the install.sh script executable,
 the alias will also be created!
 
+Also, be sure to clone the repo on your ~/ (user) folder!
 
 ```sh
-cd pvm
+cd ~/pvm
 chmod a+x install.sh
 ./install.sh
 ```
