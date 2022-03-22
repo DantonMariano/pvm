@@ -81,18 +81,21 @@ def get_php_versions() -> list:
     list.pop(0)
     return list
 
-def now_running_php(version) -> None: 
-    output = subprocess.run(['php -v | grep "PHP {}"'.format(version)], shell=True, stdout=subprocess.PIPE)
+def current_php_version() -> str:
+    output = subprocess.run(['php -v | grep "PHP"'], shell=True, stdout=subprocess.PIPE)
     php_version = str(output.stdout)
-    if php_version == "b''":
-        print(red("Version not available."))
-    else:
+    return php_version.split(' ')[1]
+
+def is_running_php(version) -> None: 
+    if version in current_php_version():
         print(green("Now running PHP {}!".format(version)))
+    else:
+        print(red("Version not available."))
 
 def change_php(version) -> None:
     print(run(red('We need your super user password to change the PHP version in use.\n')))
     subprocess.run(['sudo update-alternatives --set php /usr/bin/php{}'.format(version)], shell=True)
-    now_running_php(version)
+    is_running_php(version)
 
 def install_php(version) -> None:
     subprocess.run('sudo apt install php{} -y'.format(version), shell=True)
@@ -115,14 +118,18 @@ def main(control = False) -> None:
             sys.exit(0)
 
         if(control == True):
-            print(purple(PHP_LOGO)+blue(BLUE_LOGO)+yellow(YELLOW_LOGO)+blue("#STANDWITHUKRAINE ")+yellow("#STANDWITHUKRAINE "))
+            print(lightpurple(PHP_LOGO)+blue(BLUE_LOGO)+yellow(YELLOW_LOGO)+lightblue("#STANDWITHUKRAINE ")+yellow("#STANDWITHUKRAINE "))
 
         answer = main_menu()
 
         if answer == "See PHP Versions Installed":
             list = get_php_versions()
+            current_php = current_php_version()
             for phpv in list:
-                print("    "+purple("PHP")+"-{}".format(phpv))
+                if phpv in current_php:
+                    print("    "+lightpurple("PHP-{} ").format(phpv)+green("← Current"))
+                else:
+                    print("    "+grey("PHP")+"-{}".format(phpv))
             question_go_back = Bullet(
                 choices=['Go Back', 'Exit'],
                 indent=0,
@@ -158,6 +165,7 @@ def main(control = False) -> None:
                 main()
             else:
                 change_php(answer)
+                main()
         
         if answer == "Install New PHP Version":
             answer = input("Which version would you like to have installed? ")
@@ -169,7 +177,10 @@ def main(control = False) -> None:
                 print(green('Installing PHP Version {}'.format(answer)))
                 print(run(red('We need your super user password to change the PHP version in use.\n')))
                 install_php(answer)
+                main()
                 
+        if answer == "Exit":
+            print("\nExiting PVM, Bye!")   
     except KeyboardInterrupt:
         print("\nExiting PVM, Bye!")
 
