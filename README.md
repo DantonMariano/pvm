@@ -34,7 +34,7 @@ You can simply use it via the shorthand which is
 pvm -cv (desired version) [ex: 7.4, 8.1, 5.6]
 ```
 
-or use the User Interface! by executing:
+or use the Graphics User Interface in the CLI! by executing:
 ```sh
 pvm
 ```
