@@ -108,10 +108,10 @@ def main(control = False) -> None:
             install_php(sys.argv[2])
             sys.exit(0)
         elif len(sys.argv) > 2:
-            print("Oops, too many arguments, by now you can run zork -h OR zork --help")
+            print("Too many arguments, try running pvm")
             sys.exit(0)
         elif sys.argv[0] == __file__ and len(sys.argv) > 1:
-            print("Oops, type zork -h OR zork --help to see what zork can do")
+            print("Arguments not valid, try running pvm")
             sys.exit(0)
 
         if(control == True):
