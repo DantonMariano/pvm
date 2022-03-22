@@ -7,10 +7,11 @@
 
 - Install and manage different PHP versions
 - Shorthand command for Changing Versions -cv
+- Shorthand command for Installing Different Versions -i
 
 I was running into the issue of doing the same old boring repetitive task of googling "how to change php versions on linux/ubuntu/debian etc... the list goes on." So I Had the idea of simply creating a tool that automates this! for now it only works with Debian/Ubuntu derivative distros. But I'm pretty sure that's the most of you out there anyways (hats off to Fedora/CentOS users btw)
 
-> Couldn't there be just a simple package for PHP version management that worked a bit like zork, and a bit like nvm (node version manager)?
+> Couldn't there be just a simple package for PHP version management that worked a bit like nvm (node version manager)?
 
 ## Installation
 
@@ -28,13 +29,14 @@ chmod a+x install.sh
 
 And there you go! now you have PVM Installed!
 
-You can simply use it via the shorthand which is
+You can simply use it via the shorthand commands which are
 
 ```sh
 pvm -cv (desired version) [ex: 7.4, 8.1, 5.6]
+pvm -i (desired version)  [ex: 7.4, 8.1, 5.6]
 ```
 
-or use the User Interface! by executing:
+or use the Graphics User Interface in the CLI! by executing:
 ```sh
 pvm
 ```
