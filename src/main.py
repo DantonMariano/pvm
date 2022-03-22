@@ -4,8 +4,6 @@
 """
 This is a script to make it easier to switch between PHP versions on local environments.
 """
-from gettext import install
-from sys import stdout
 
 try:
     import sys
@@ -83,7 +81,7 @@ def get_php_versions() -> list:
     list.pop(0)
     return list
 
-def now_running_php(version): 
+def now_running_php(version) -> None: 
     output = subprocess.run(['php -v | grep "PHP {}"'.format(version)], shell=True, stdout=subprocess.PIPE)
     php_version = str(output.stdout)
     if php_version == "b''":
@@ -91,16 +89,16 @@ def now_running_php(version):
     else:
         print(green("Now running PHP {}!".format(version)))
 
-def change_php(version):
+def change_php(version) -> None:
     print(run(red('We need your super user password to change the PHP version in use.\n')))
     subprocess.run(['sudo update-alternatives --set php /usr/bin/php{}'.format(version)], shell=True)
     now_running_php(version)
 
-def install_php(version):
+def install_php(version) -> None:
     subprocess.run('sudo apt install php{} -y'.format(version), shell=True)
     change_php(version)
 
-def main(control = False):
+def main(control = False) -> None:
     try: 
 
         if len(sys.argv) == 3 and (sys.argv[1] == "-cv" or sys.argv[1] == "--change-version"):
@@ -117,7 +115,7 @@ def main(control = False):
             sys.exit(0)
 
         if(control == True):
-            print(purple(PHP_LOGO)+blue(BLUE_LOGO)+yellow(YELLOW_LOGO)+blue("#STANDWITHUKRAINE"))
+            print(purple(PHP_LOGO)+blue(BLUE_LOGO)+yellow(YELLOW_LOGO)+blue("#STANDWITHUKRAINE ")+yellow("#STANDWITHUKRAINE "))
 
         answer = main_menu()
 
@@ -172,6 +170,7 @@ def main(control = False):
                 print(run(red('We need your super user password to change the PHP version in use.\n')))
                 install_php(answer)
                 
-    except KeyboardInterrupt:answer
+    except KeyboardInterrupt:
+        print("\nExiting PVM, Bye!")
 
 main(True)
