@@ -19,7 +19,7 @@ PVM requires Python to run, but it will be installed
 as soon as you make the install.sh script executable,
 the alias will also be created!
 
-Also, be sure to clone the repo on your ~/ (user) folder!
+Also, be sure to clone the repo on your ~/ (user) folder!!
 
 ```sh
 cd ~/pvm
