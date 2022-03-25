@@ -93,9 +93,13 @@ def is_running_php(version) -> None:
         print(red("Version not available."))
 
 def change_php(version) -> None:
-    print(run(red('We need your super user password to change the PHP version in use.\n')))
-    subprocess.run(['sudo update-alternatives --set php /usr/bin/php{}'.format(version)], shell=True)
-    is_running_php(version)
+    curr_php = current_php_version();
+    if version in curr_php:
+        print(green("Already using PHP {}".format(version)))
+    else:
+        print(run(red('We need your super user password to change the PHP version in use.\n')))
+        subprocess.run(['sudo update-alternatives --set php /usr/bin/php{}'.format(version)], shell=True)
+        is_running_php(version)
 
 def install_php(version) -> None:
     subprocess.run('sudo apt install php{} -y'.format(version), shell=True)
