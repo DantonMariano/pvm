@@ -9,7 +9,10 @@ select yn in "Yes" "No"; do
             sudo apt-get install -y build-essential python3 python3-dev python3-pip python3-setuptools
             sudo pip3 install --upgrade pip
             sudo apt-get install -y curl libcurl4-gnutls-dev librtmp-dev aria2
-            cd /home/$USER/zork/
+            sudo apt-get install ca-certificates apt-transport-https software-properties-common
+            add-apt-repository ppa:ondrej/php
+            apt-get update
+            cd /home/$USER/pvm/
             pip3 install -r requirements.txt
 
             echo -e 'Adding pvm alias...\n'
